@@ -1,5 +1,3 @@
-import blueBlog from "../../assets/svg/blue-blog.svg";
-
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
@@ -14,7 +12,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         backgroundPosition: "top",
       }}
     >
-      <div className="container h-screen">{children}</div>
+      <div className="px-4 sm:px-0 sm:container h-screen">{children}</div>
     </div>
   );
 }

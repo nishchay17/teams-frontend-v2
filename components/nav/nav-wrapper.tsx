@@ -8,7 +8,7 @@ export default function NavbarWrapper({
   children: React.ReactNode;
 }) {
   return (
-    <nav className="flex justify-between items-center pt-3 pb-2">
+    <nav className="flex justify-between items-center pt-3 pb-2 sm:fixed sm:container">
       <Link href="/" className={buttonVariants({ variant: "link" })}>
         <h2 className="font-medium">Teams</h2>
       </Link>
