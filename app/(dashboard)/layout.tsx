@@ -16,26 +16,33 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <Icons.hero height={24} width={24} />
               <h1 className="font-semibold text-lg">Teams Collab</h1>
             </div>
-            <div>
-              <p className="text-xs mb-1">
-                <i>Your Status</i>
+            <div className="flex gap-4 items-center">
+              <p className="border-2 h-fit text-xs font-medium mr-2 px-2 py-0.5 rounded">
+                New tasks: 2
               </p>
-              <div className="flex rounded w-[200px] overflow-hidden">
-                <div title="New" className="bg-red-500 w-[20%] h-2" />
-                <div title="In progress" className="bg-sky-500 w-[50%] h-2" />
-                <div title="Completed" className="bg-emerald-500 w-[30%] h-2" />
+              <div>
+                <p className="text-xs mb-1">
+                  <i>Your Status</i>
+                </p>
+                <div className="flex rounded w-[200px] overflow-hidden">
+                  <div title="New" className="bg-red-500 w-[20%] h-2" />
+                  <div title="In progress" className="bg-sky-500 w-[50%] h-2" />
+                  <div
+                    title="Completed"
+                    className="bg-emerald-500 w-[30%] h-2"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </nav>
       </div>
-      <div className="px-4 grid flex-1 gap-12 md:grid-cols-[200px_1fr] mx-auto max-w-[1700px]">
+      <div className="px-4 grid gap-12 md:grid-cols-[200px_1px_1fr] mx-auto max-w-[1700px]">
         <aside className="hidden w-[200px] flex-col md:flex">
           <DashboardNav items={AdminDashboardNav} />
         </aside>
-        <main className="flex w-full flex-1 flex-col overflow-hidden">
-          {children}
-        </main>
+        <div className="w-[1px] bg-border" />
+        <main className="flex flex-col">{children}</main>
       </div>
     </>
   );
