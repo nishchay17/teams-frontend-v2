@@ -11,13 +11,13 @@ export const AdminDashboardNav = [
     href: "/dashboard/add-task",
     icon: "add-list",
   },
-  {
-    title: "Profile",
-    disabled: false,
-    href: "/dashboard",
-    icon: "profile",
-  },
-  { title: "Bucket", disabled: false, href: "/", icon: "file" },
+  // {
+  //   title: "Profile",
+  //   disabled: false,
+  //   href: "/dashboard",
+  //   icon: "profile",
+  // },
+  { title: "Bucket", disabled: false, href: "/dashboard/bucket", icon: "file" },
   { title: "Add User", disabled: false, href: "/", icon: "add" },
   {
     title: "Manage User",
