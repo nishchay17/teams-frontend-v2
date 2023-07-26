@@ -1,4 +1,7 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import UserDialog from "@/components/user-dialog";
 
 function UserProfileCard({
   username,
@@ -17,6 +20,7 @@ function UserProfileCard({
       <p className="text-sm">Total Tasks: {total}</p>
       <p className="text-sm">Completed Tasks: {completed}</p>
       <p className="text-sm">In progress Tasks: {inprogress}</p>
+      <UserDialog username={username} />
     </div>
   );
 }
@@ -30,6 +34,7 @@ export default function ManageUsers() {
           Add User
         </Button>
       </div>
+
       <div className="grid grid-cols-4 gap-4 mt-5">
         <UserProfileCard
           username="Nishchay"
@@ -38,25 +43,25 @@ export default function ManageUsers() {
           inprogress={4}
         />
         <UserProfileCard
-          username="Nishchay"
+          username="Nishchay1"
           total={10}
           completed={6}
           inprogress={4}
         />
         <UserProfileCard
-          username="Nishchay"
+          username="Nishchay2"
           total={10}
           completed={6}
           inprogress={4}
         />
         <UserProfileCard
-          username="Nishchay"
+          username="Nishchay4"
           total={10}
           completed={6}
           inprogress={4}
         />
         <UserProfileCard
-          username="Nishchay"
+          username="Nishchay3"
           total={10}
           completed={6}
           inprogress={4}
