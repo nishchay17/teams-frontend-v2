@@ -1,12 +1,21 @@
 import { Icons } from "@/components/icons";
 import { DashboardNav } from "@/components/nav/dashboard-nav";
 import { AdminDashboardNav } from "@/config/dashboard-nav";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
+  const SettingIcon = Icons["setting"];
   return (
     <>
       <div className="border-b-[1px] mb-6">
@@ -33,6 +42,18 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   />
                 </div>
               </div>
+              <Menubar>
+                <MenubarMenu>
+                  <MenubarTrigger>
+                    <SettingIcon />
+                  </MenubarTrigger>
+                  <MenubarContent>
+                    <MenubarItem>Toggle Light Mode</MenubarItem>
+                    <MenubarSeparator />
+                    <MenubarItem>Logout</MenubarItem>
+                  </MenubarContent>
+                </MenubarMenu>
+              </Menubar>
             </div>
           </div>
         </nav>

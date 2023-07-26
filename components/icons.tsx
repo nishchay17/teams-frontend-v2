@@ -8,6 +8,7 @@ import {
   Kanban,
   LucideProps,
   ListPlus,
+  Settings,
   type Icon as LucideIcon,
 } from "lucide-react";
 
@@ -21,6 +22,7 @@ export const Icons: { [key: string]: Icon } = {
   file: File,
   add: PlusIcon,
   manage: Kanban,
+  setting: Settings,
   "add-list": ListPlus,
   hero: (props: LucideProps) => (
     <svg
