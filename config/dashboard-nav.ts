@@ -18,11 +18,10 @@ export const AdminDashboardNav = [
   //   icon: "profile",
   // },
   { title: "Bucket", disabled: false, href: "/dashboard/bucket", icon: "file" },
-  { title: "Add User", disabled: false, href: "/", icon: "add" },
   {
-    title: "Manage User",
+    title: "Manage Users",
     disabled: false,
-    href: "/",
+    href: "/dashboard/manage-users",
     icon: "manage",
   },
 ];
