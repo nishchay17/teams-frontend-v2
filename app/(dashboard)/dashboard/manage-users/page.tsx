@@ -12,7 +12,7 @@ function UserProfileCard({
   completed: number;
 }) {
   return (
-    <div className="bg-secondary rounded py-3 px-4">
+    <div className="bg-secondary rounded py-3 px-4 cursor-pointer">
       <h4 className="mb-2">{username}</h4>
       <p className="text-sm">Total Tasks: {total}</p>
       <p className="text-sm">Completed Tasks: {completed}</p>
