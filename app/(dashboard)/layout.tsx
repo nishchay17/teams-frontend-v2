@@ -1,6 +1,7 @@
 "use client";
 
 import { signOut } from "next-auth/react";
+import { useTheme } from "next-themes";
 
 import { Icons } from "@/components/icons";
 import { DashboardNav } from "@/components/nav/dashboard-nav";
@@ -19,6 +20,7 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
+  const { setTheme, theme } = useTheme();
   const SettingIcon = Icons["setting"];
   return (
     <>
@@ -52,7 +54,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     <SettingIcon />
                   </MenubarTrigger>
                   <MenubarContent>
-                    <MenubarItem>Toggle Light Mode</MenubarItem>
+                    <MenubarItem
+                      onClick={() =>
+                        theme == "dark" ? setTheme("light") : setTheme("dark")
+                      }
+                    >
+                      Toggle Light Mode
+                    </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem
                       onClick={() => signOut({ callbackUrl: "/signin" })}
