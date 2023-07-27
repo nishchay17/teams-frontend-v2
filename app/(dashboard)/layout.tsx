@@ -1,3 +1,7 @@
+"use client";
+
+import { signOut } from "next-auth/react";
+
 import { Icons } from "@/components/icons";
 import { DashboardNav } from "@/components/nav/dashboard-nav";
 import { AdminDashboardNav } from "@/config/dashboard-nav";
@@ -50,7 +54,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   <MenubarContent>
                     <MenubarItem>Toggle Light Mode</MenubarItem>
                     <MenubarSeparator />
-                    <MenubarItem>Logout</MenubarItem>
+                    <MenubarItem
+                      onClick={() => signOut({ callbackUrl: "/signin" })}
+                    >
+                      Logout
+                    </MenubarItem>
                   </MenubarContent>
                 </MenubarMenu>
               </Menubar>

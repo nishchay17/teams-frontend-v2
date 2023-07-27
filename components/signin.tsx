@@ -3,6 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { signIn as nextSignIn, useSession } from "next-auth/react";
+import { redirect, useSearchParams } from "next/navigation";
 
 import {
   Form,
@@ -15,10 +17,18 @@ import {
 import { userSigninSchema } from "@/lib/validation/signin";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 type FormData = z.infer<typeof userSigninSchema>;
 
 function Signin() {
+  const session = useSession();
+  if (session.status === "authenticated") {
+    redirect("/dashboard");
+  }
+  const { toast } = useToast();
+
+  const searchParams = useSearchParams();
   const form = useForm<FormData>({
     defaultValues: {
       email: "",
@@ -27,7 +37,19 @@ function Signin() {
     resolver: zodResolver(userSigninSchema),
   });
 
-  async function onSubmit(data: FormData) {}
+  async function onSubmit(data: FormData) {
+    const signinRes = await nextSignIn("credentials", {
+      ...data,
+      redirect: false,
+      callbackUrl: searchParams?.get("from") || "/dashboard",
+    });
+    if (!!signinRes?.error) {
+      toast({
+        title: "Error in signin",
+        description: signinRes.error,
+      });
+    }
+  }
 
   return (
     <div className="flex justify-center items-center my-auto">

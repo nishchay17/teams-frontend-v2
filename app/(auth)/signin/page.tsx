@@ -9,7 +9,7 @@ export default function SigninPage() {
     <section className="flex flex-col min-h-screen">
       <NavbarWrapper>
         <Link
-          href="signup"
+          href="/signup"
           className={buttonVariants({ variant: "outline", size: "sm" })}
         >
           Sign up
