@@ -14,6 +14,7 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import { Links } from "@/config/links";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -63,7 +64,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem
-                      onClick={() => signOut({ callbackUrl: "/signin" })}
+                      onClick={() =>
+                        signOut({ callbackUrl: Links.signin.href })
+                      }
                     >
                       Logout
                     </MenubarItem>

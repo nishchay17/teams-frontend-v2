@@ -2,9 +2,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
 
+import { Links } from "@/config/links";
+
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: "/signin",
+    signIn: Links.signin.href,
   },
   session: {
     strategy: "jwt",

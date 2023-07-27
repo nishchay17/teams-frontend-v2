@@ -18,13 +18,14 @@ import { userSigninSchema } from "@/lib/validation/signin";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Links } from "@/config/links";
 
 type FormData = z.infer<typeof userSigninSchema>;
 
 function Signin() {
   const session = useSession();
   if (session.status === "authenticated") {
-    redirect("/dashboard");
+    redirect(Links.task.href);
   }
   const { toast } = useToast();
 
@@ -41,7 +42,7 @@ function Signin() {
     const signinRes = await nextSignIn("credentials", {
       ...data,
       redirect: false,
-      callbackUrl: searchParams?.get("from") || "/dashboard",
+      callbackUrl: searchParams?.get("from") || Links.task.href,
     });
     if (!!signinRes?.error) {
       toast({
