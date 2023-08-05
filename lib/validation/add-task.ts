@@ -9,9 +9,10 @@ const ACCEPTED_FILE_TYPES = [
 ];
 
 export const addTaskSchema = z.object({
-  title: z.string(),
-  assignedTo: z.string(),
+  name: z.string().nonempty(),
+  assignedTo: z.string().nonempty(),
   description: z.string().optional(),
+  file: z.any().optional(),
 });
 
 export const addTaskFilesSchema = z

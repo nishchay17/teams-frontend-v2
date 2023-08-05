@@ -18,14 +18,19 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import FileDropzone from "@/components/file-drop-zone";
+import useAddTask from "@/hooks/useAddTask";
+import { useToast } from "@/components/ui/use-toast";
 
 type FormData = z.infer<typeof addTaskSchema>;
 
 export default function AddTask() {
+  const addTask = useAddTask();
   const [fileError, setFileError] = useState<string>("");
+  const [file, setFile] = useState<File>();
+  const { toast } = useToast();
   const form = useForm<FormData>({
     defaultValues: {
-      title: "",
+      name: "",
       assignedTo: "",
       description: "",
     },
@@ -33,7 +38,24 @@ export default function AddTask() {
   });
 
   async function onSubmit(data: FormData) {
-    console.log({ data });
+    addTask.mutate(
+      { ...data, file },
+      {
+        onError: (error: unknown) => {
+          console.log(error);
+          toast({
+            title: "Error while creating Task",
+            description: "Please check network connect and try again",
+          });
+        },
+        onSuccess: (data) => {
+          toast({
+            title: data.status ? "Task Created" : "Error while creating Task",
+            description: data.message,
+          });
+        },
+      }
+    );
   }
 
   return (
@@ -54,7 +76,7 @@ export default function AddTask() {
             <div className="flex-1 flex gap-4 flex-col">
               <FormField
                 control={form.control}
-                name="title"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Title</FormLabel>
@@ -108,7 +130,7 @@ export default function AddTask() {
               />
             </div>
             <FileDropzone
-              onDrop={(files: FileList) => console.log(files)}
+              onDrop={(files: FileList) => setFile(files[0])}
               error={fileError}
             />
           </div>
