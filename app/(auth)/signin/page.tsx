@@ -13,7 +13,7 @@ export default function SigninPage() {
           href={Links.signup.href}
           className={buttonVariants({ variant: "outline", size: "sm" })}
         >
-          {Links.signin.title}
+          {Links.signup.title}
         </Link>
       </NavbarWrapper>
       <Signin />
