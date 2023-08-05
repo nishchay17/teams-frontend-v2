@@ -4,7 +4,7 @@ import type { NextAuthOptions } from "next-auth";
 
 import { Links } from "@/config/links";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   pages: {
     signIn: Links.signin.href,
   },
