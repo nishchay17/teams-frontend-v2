@@ -25,7 +25,6 @@ type FormData = z.infer<typeof addTaskSchema>;
 
 export default function AddTask() {
   const addTask = useAddTask();
-  const [fileError, setFileError] = useState<string>("");
   const [file, setFile] = useState<File>();
   const { toast } = useToast();
   const form = useForm<FormData>({
@@ -42,7 +41,7 @@ export default function AddTask() {
       { ...data, file },
       {
         onError: (error: unknown) => {
-          console.log(error);
+          console.error(error);
           toast({
             title: "Error while creating Task",
             description: "Please check network connect and try again",
@@ -53,6 +52,8 @@ export default function AddTask() {
             title: data.status ? "Task Created" : "Error while creating Task",
             description: data.message,
           });
+          setFile(undefined);
+          form.reset();
         },
       }
     );
@@ -62,7 +63,7 @@ export default function AddTask() {
     <>
       <div className="flex justify-between items-center">
         <h2 className="text-2xl mb-4">Add Task</h2>
-        <Button form="add-task" type="submit">
+        <Button form="add-task" type="submit" isLoading={addTask.isLoading}>
           Add Task
         </Button>
       </div>
@@ -131,7 +132,7 @@ export default function AddTask() {
             </div>
             <FileDropzone
               onDrop={(files: FileList) => setFile(files[0])}
-              error={fileError}
+              text={file?.name}
             />
           </div>
         </form>

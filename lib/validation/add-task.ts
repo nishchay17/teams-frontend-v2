@@ -11,7 +11,7 @@ const ACCEPTED_FILE_TYPES = [
 export const addTaskSchema = z.object({
   name: z.string().nonempty(),
   assignedTo: z.string().nonempty(),
-  description: z.string().optional(),
+  description: z.string().nonempty(),
   file: z.any().optional(),
 });
 

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useId } from "react";
+import { useRef, useEffect, useId, useState } from "react";
 
 interface Props {
   onDrop: (files: FileList) => void;
@@ -13,6 +13,7 @@ export default function FileDropzone({
 }: Props) {
   const id = useId();
   const drop = useRef<null | HTMLDivElement>(null);
+
   useEffect(() => {
     if (!!drop.current) {
       drop.current.addEventListener("dragover", handleDragOver);
@@ -37,9 +38,21 @@ export default function FileDropzone({
       onDrop(files);
     }
   };
+
+  const handleChange = (e: any) => {
+    const { files } = e.target;
+    onDrop(files);
+  };
+
   return (
     <>
-      <input id={`file-${id}`} type="file" style={{ display: "none" }} />
+      <input
+        id={`file-${id}`}
+        multiple={false}
+        type="file"
+        onChange={handleChange}
+        style={{ display: "none" }}
+      />
       <label htmlFor={`file-${id}`}>
         <div
           ref={drop}
