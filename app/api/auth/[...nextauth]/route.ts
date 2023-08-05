@@ -3,6 +3,7 @@ import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
 
 import { Links } from "@/config/links";
+import { apiLinks } from "@/config/api-links";
 
 const authOptions: NextAuthOptions = {
   pages: {
@@ -20,14 +21,11 @@ const authOptions: NextAuthOptions = {
           email: string;
           password: string;
         };
-        const res = await fetch(
-          "https://teams-backend.onrender.com/api/user/login",
-          {
-            method: "POST",
-            body: JSON.stringify({ email, password }),
-            headers: { "Content-Type": "application/json" },
-          }
-        );
+        const res = await fetch(apiLinks.login, {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+          headers: { "Content-Type": "application/json" },
+        });
         const data = await res.json();
         if (!res.ok || !data) {
           throw new Error("Some error occurred");
