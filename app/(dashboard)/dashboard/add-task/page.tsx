@@ -20,17 +20,20 @@ import { Textarea } from "@/components/ui/textarea";
 import FileDropzone from "@/components/file-drop-zone";
 import useAddTask from "@/hooks/useAddTask";
 import { useToast } from "@/components/ui/use-toast";
+import Select from "@/components/ui/Select";
+import useAllUser from "@/hooks/useAllUser";
 
 type FormData = z.infer<typeof addTaskSchema>;
 
 export default function AddTask() {
   const addTask = useAddTask();
+  const allUsers = useAllUser();
   const [file, setFile] = useState<File>();
   const { toast } = useToast();
   const form = useForm<FormData>({
     defaultValues: {
       name: "",
-      assignedTo: "",
+      assignedTo: undefined,
       description: "",
     },
     resolver: zodResolver(addTaskSchema),
@@ -58,6 +61,17 @@ export default function AddTask() {
       }
     );
   }
+
+  const getList = () => {
+    return new Promise((res) => {
+      res(
+        allUsers.data.users.map((data: any) => ({
+          label: data.name,
+          value: data._id,
+        }))
+      );
+    });
+  };
 
   return (
     <>
@@ -100,12 +114,7 @@ export default function AddTask() {
                   <FormItem>
                     <FormLabel>Assigned To</FormLabel>
                     <FormControl>
-                      <Input
-                        autoCapitalize="none"
-                        autoCorrect="off"
-                        type="text"
-                        {...field}
-                      />
+                      <Select defaultOptions loadOptions={getList} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

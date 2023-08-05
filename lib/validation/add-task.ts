@@ -8,10 +8,15 @@ const ACCEPTED_FILE_TYPES = [
   "image/webp",
 ];
 
-export const addTaskSchema = z.object({
-  name: z.string().nonempty(),
-  assignedTo: z.string().nonempty(),
-  description: z.string().nonempty(),
+export const addTaskSchema: any = z.object({
+  name: z.string().trim().nonempty(),
+  assignedTo: z
+    .object({
+      label: z.string().trim().nonempty(),
+      value: z.string().trim().nonempty(),
+    })
+    .transform((v) => v.value),
+  description: z.string().trim().nonempty(),
   file: z.any().optional(),
 });
 
