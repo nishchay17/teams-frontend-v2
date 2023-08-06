@@ -33,7 +33,7 @@ export default function AddTask() {
   const form = useForm<FormData>({
     defaultValues: {
       name: "",
-      assignedTo: undefined,
+      assignedTo: { value: "", label: "" },
       description: "",
     },
     resolver: zodResolver(addTaskSchema),
