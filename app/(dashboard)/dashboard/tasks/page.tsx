@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   DragDropContext,
   DropResult,
@@ -8,44 +8,89 @@ import {
   Draggable,
 } from "react-beautiful-dnd";
 
-function Card() {
+import { Icons } from "@/components/icons";
+import { Button } from "@/components/ui/button";
+import useMyUser, { useInvalidateMyUser } from "@/hooks/useMyUser";
+
+function Card({ name, description }: IListItem) {
   return (
     <div className="bg-background py-2 px-3 select-none">
-      <p className="mb-1 text-sm font-medium">Create New frontend</p>
-      <p className="text-xs opacity-90">
-        Create with next js and with a clean UI
-      </p>
+      <p className="mb-1 text-sm font-medium">{name}</p>
+      <p className="text-xs opacity-90">{description}</p>
     </div>
   );
 }
 
-interface IListSome {
+interface IListItem {
+  _id: string;
+  updatedAt: string;
+  name: string;
+  description: string;
+}
+interface ITaskList {
   [index: string]: {
     id: string;
     displayName: string;
-    list: string[];
+    list: IListItem[];
   };
 }
 
 export default function Tasks() {
-  const initialColumns: IListSome = {
-    new: {
-      id: "new",
-      displayName: "New",
-      list: ["item 1", "item 2", "item 3", "item 4", "item 5", "item 6"],
-    },
-    inprogress: {
-      id: "inprogress",
-      displayName: "In Progress",
-      list: ["item 7", "item 8", "item 9"],
-    },
-    complete: {
-      id: "complete",
-      displayName: "Complete",
-      list: [],
-    },
-  };
+  const myUser = useMyUser();
+  const invalidateMyUser = useInvalidateMyUser();
+  const ReloadIcon = Icons["reload"];
+  const initialColumns: ITaskList = useMemo(
+    () => ({
+      new: {
+        id: "new",
+        displayName: "New",
+        list: [],
+      },
+      inprogress: {
+        id: "inprogress",
+        displayName: "In Progress",
+        list: [],
+      },
+      complete: {
+        id: "complete",
+        displayName: "Complete",
+        list: [],
+      },
+    }),
+    []
+  );
   const [columns, setColumns] = useState(initialColumns);
+
+  useEffect(() => {
+    if (!myUser.isLoading && myUser.data.status) {
+      const newState = { ...initialColumns };
+      newState.new.list = myUser.data.user.taskAssigned.map(
+        (data: IListItem) => ({
+          _id: data._id,
+          name: data.name,
+          updatedAt: data.updatedAt,
+          description: data.description,
+        })
+      );
+      newState.complete.list = myUser.data.user.taskCompleted.map(
+        (data: IListItem) => ({
+          _id: data._id,
+          name: data.name,
+          updatedAt: data.updatedAt,
+          description: data.description,
+        })
+      );
+      newState.inprogress.list = myUser.data.user.taskInProgress.map(
+        (data: IListItem) => ({
+          _id: data._id,
+          name: data.name,
+          updatedAt: data.updatedAt,
+          description: data.description,
+        })
+      );
+      setColumns(newState);
+    }
+  }, [myUser.isLoading, myUser.data, initialColumns]);
 
   const onDragEnd = ({ source, destination }: DropResult) => {
     // Make sure we have a valid destination
@@ -122,7 +167,16 @@ export default function Tasks() {
 
   return (
     <>
-      <h2 className="text-2xl mb-4">Tasks</h2>
+      <div className="flex justify-between items-center mb-5">
+        <h2 className="text-2xl mb-4">Tasks</h2>
+        <Button
+          onClick={invalidateMyUser}
+          variant="ghost"
+          isLoading={myUser.isFetching}
+        >
+          {!myUser.isFetching && <ReloadIcon size="1rem" />}
+        </Button>
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-3 gap-5">
           {Object.values(columns).map((col) => (
@@ -134,15 +188,19 @@ export default function Tasks() {
                   ref={provided.innerRef}
                 >
                   <p>{col.displayName}</p>
-                  {col.list.map((text, index) => (
-                    <Draggable draggableId={text} index={index} key={index}>
+                  {col.list.map((task, index) => (
+                    <Draggable
+                      draggableId={task._id}
+                      index={index}
+                      key={task._id}
+                    >
                       {(provided) => (
                         <div
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                         >
-                          <Card />
+                          <Card {...task} />
                         </div>
                       )}
                     </Draggable>

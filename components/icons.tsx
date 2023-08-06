@@ -9,6 +9,7 @@ import {
   LucideProps,
   ListPlus,
   Settings,
+  RotateCw,
   type Icon as LucideIcon,
 } from "lucide-react";
 
@@ -24,6 +25,7 @@ export const Icons: { [key: string]: Icon } = {
   manage: Kanban,
   setting: Settings,
   "add-list": ListPlus,
+  reload: RotateCw,
   hero: (props: LucideProps) => (
     <svg
       width="30"

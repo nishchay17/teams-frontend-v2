@@ -75,18 +75,14 @@ export default function AddTask() {
 
   return (
     <>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-5">
         <h2 className="text-2xl mb-4">Add Task</h2>
         <Button form="add-task" type="submit" isLoading={addTask.isLoading}>
           Add Task
         </Button>
       </div>
       <Form {...form}>
-        <form
-          id="add-task"
-          className="mt-5"
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
+        <form id="add-task" onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex-1 flex gap-4 flex-col">
               <FormField
