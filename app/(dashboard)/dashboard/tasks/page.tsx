@@ -14,7 +14,7 @@ import useMyUser, { useInvalidateMyUser } from "@/hooks/useMyUser";
 
 function Card({ name, description }: IListItem) {
   return (
-    <div className="bg-background py-2 px-3 select-none">
+    <div className="bg-background border py-2 px-3 select-none rounded">
       <p className="mb-1 text-sm font-medium">{name}</p>
       <p className="text-xs opacity-90">{description}</p>
     </div>
@@ -183,11 +183,11 @@ export default function Tasks() {
             <Droppable droppableId={col.id} key={col.id}>
               {(provided) => (
                 <div
-                  className="bg-primary-foreground border-2 p-4 flex flex-col gap-3 rounded-sm"
+                  className="bg-primary-foreground border p-4 flex flex-col gap-3 rounded-sm"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  <p>{col.displayName}</p>
+                  <p className="select-none">{col.displayName}</p>
                   {col.list.map((task, index) => (
                     <Draggable
                       draggableId={task._id}
