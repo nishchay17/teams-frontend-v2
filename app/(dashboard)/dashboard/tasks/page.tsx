@@ -167,8 +167,8 @@ export default function Tasks() {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-5">
-        <h2 className="text-2xl mb-4">Tasks</h2>
+      <div className="flex justify-between items-center mb-7">
+        <h2 className="text-2xl">Tasks</h2>
         <Button
           onClick={invalidateMyUser}
           variant="ghost"

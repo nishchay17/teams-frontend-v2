@@ -28,14 +28,14 @@ function UserProfileCard({
 export default function ManageUsers() {
   return (
     <>
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl mb-4">Manage Users</h2>
+      <div className="flex justify-between items-center mb-7">
+        <h2 className="text-2xl">Manage Users</h2>
         <Button form="add-task" type="submit">
           Add User
         </Button>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mt-5">
+      <div className="grid grid-cols-4 gap-4 mb-5">
         <UserProfileCard
           username="Nishchay"
           total={10}
