@@ -64,8 +64,8 @@ export default function AddTask() {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-5">
-        <h2 className="text-2xl mb-4">Add Task</h2>
+      <div className="flex justify-between items-center mb-7">
+        <h2 className="text-2xl">Add Task</h2>
         <Button form={FORM_ID} type="submit" isLoading={addTask.isLoading}>
           Add Task
         </Button>
