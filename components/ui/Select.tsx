@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { forwardRef } from "react";
+import { forwardRef, useId } from "react";
 import AsyncSelect from "react-select/async";
 
 const Select = forwardRef<HTMLSelectElement, any>((props, ref) => {
@@ -27,6 +27,7 @@ const Select = forwardRef<HTMLSelectElement, any>((props, ref) => {
 
   return (
     <AsyncSelect
+      instanceId={useId()}
       ref={ref}
       unstyled
       {...props}
