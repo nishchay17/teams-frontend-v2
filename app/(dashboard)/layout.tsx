@@ -15,6 +15,7 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Links } from "@/config/links";
+import TaskStats from "@/components/taskStats";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -36,19 +37,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <p className="border-2 h-fit text-xs font-medium mr-2 px-2 py-0.5 rounded">
                 New tasks: 2
               </p>
-              <div>
-                <p className="text-xs mb-1">
-                  <i>Your Status</i>
-                </p>
-                <div className="flex rounded w-[200px] overflow-hidden">
-                  <div title="New" className="bg-red-500 w-[20%] h-2" />
-                  <div title="In progress" className="bg-sky-500 w-[50%] h-2" />
-                  <div
-                    title="Completed"
-                    className="bg-emerald-500 w-[30%] h-2"
-                  />
-                </div>
-              </div>
+              <TaskStats />
               <Menubar>
                 <MenubarMenu>
                   <MenubarTrigger>
