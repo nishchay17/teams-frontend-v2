@@ -5,10 +5,6 @@ export const AdminDashboardNav = [
   Links.addTask,
   Links.bucket,
   Links.manageUser,
-] as const;
+];
 
-export const UserDashboardNav = [
-  Links.task,
-  Links.addTask,
-  Links.bucket,
-] as const;
+export const UserDashboardNav = [Links.task, Links.addTask, Links.bucket];
