@@ -1,3 +1,5 @@
+import { UseFormReturn } from "react-hook-form";
+
 import { Textarea } from "@/components/ui/textarea";
 import FileDropzone from "@/components/file-drop-zone";
 import {
@@ -10,7 +12,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Select from "@/components/ui/Select";
-import { UseFormReturn } from "react-hook-form";
 
 type AddTaskProps = {
   form: UseFormReturn<any, any, undefined>;
