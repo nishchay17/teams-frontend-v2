@@ -11,6 +11,7 @@ import {
   Settings,
   RotateCw,
   type Icon as LucideIcon,
+  ArrowLeft,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
@@ -19,6 +20,7 @@ export const Icons: { [key: string]: Icon } = {
   checkBox: CheckSquare,
   warning: AlertTriangle,
   arrowRight: ArrowRight,
+  arrowLeft: ArrowLeft,
   profile: User2,
   file: File,
   add: PlusIcon,
