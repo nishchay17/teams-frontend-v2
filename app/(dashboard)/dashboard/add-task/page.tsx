@@ -45,8 +45,10 @@ export default function AddTask() {
             title: data.status ? "Task Created" : "Error while creating Task",
             description: data.message,
           });
-          setFile(undefined);
-          form.reset();
+          if (!!data.status) {
+            setFile(undefined);
+            form.reset();
+          }
         },
       }
     );
