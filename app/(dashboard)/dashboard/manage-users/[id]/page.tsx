@@ -1,11 +1,12 @@
 "use client";
+import Link from "next/link";
 
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import UserDialog from "@/components/user-dialog";
+import UserDetail from "@/components/userDetail";
 import { Links } from "@/config/links";
 import useAllUser from "@/hooks/useAllUser";
-import Link from "next/link";
 
 type Props = {
   params: { id: string };
@@ -30,6 +31,7 @@ export default function ManageUser({ params }: Props) {
         </Link>
         <UserDialog user={currentUser} isLoading={allUser.isLoading} />
       </div>
+      <UserDetail user={currentUser} />
     </>
   );
 }

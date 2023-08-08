@@ -11,22 +11,8 @@ import {
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import useMyUser, { useInvalidateMyUser } from "@/hooks/useMyUser";
+import TaskCard, { IListItem } from "@/components/taskCard";
 
-function Card({ name, description }: IListItem) {
-  return (
-    <div className="bg-background border py-2 px-3 select-none rounded">
-      <p className="mb-1 text-sm font-medium">{name}</p>
-      <p className="text-xs opacity-90">{description}</p>
-    </div>
-  );
-}
-
-interface IListItem {
-  _id: string;
-  updatedAt: string;
-  name: string;
-  description: string;
-}
 interface ITaskList {
   [index: string]: {
     id: string;
@@ -200,7 +186,7 @@ export default function Tasks() {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                         >
-                          <Card {...task} />
+                          <TaskCard {...task} />
                         </div>
                       )}
                     </Draggable>
