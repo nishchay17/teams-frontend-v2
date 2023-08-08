@@ -64,7 +64,7 @@ export default function FileDropzone({
             <p className="text-red-400">{error}</p>
           ) : (
             <p className="opacity-60">
-              {!!text ? text : "Drop your files here"}
+              {!!text ? text : "Drop your images here"}
             </p>
           )}
         </div>

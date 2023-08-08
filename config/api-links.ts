@@ -6,4 +6,5 @@ export const apiLinks = {
   allUser: BASE_URL + "/user/all",
   myUser: BASE_URL + "/user/me",
   addBucketItem: BASE_URL + "/bucket/upload",
+  getBucketItem: BASE_URL + "/bucket/get-all",
 } as const;
