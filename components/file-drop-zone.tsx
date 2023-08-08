@@ -41,7 +41,9 @@ export default function FileDropzone({
 
   const handleChange = (e: any) => {
     const { files } = e.target;
-    onDrop(files);
+    if (files && files.length) {
+      onDrop(files);
+    }
   };
 
   return (
