@@ -39,4 +39,4 @@ export const Links = {
     name: "manageUser",
     icon: "manage",
   },
-};
+} as const;
