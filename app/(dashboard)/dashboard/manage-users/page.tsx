@@ -2,7 +2,6 @@
 
 import AddUserDialog from "@/components/addUserDialog";
 import AllUsers from "@/components/allUsers";
-import { Button } from "@/components/ui/button";
 
 export default function ManageUsers() {
   return (

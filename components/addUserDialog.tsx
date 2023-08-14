@@ -23,10 +23,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { addUserSchema } from "@/lib/validation/add-user";
+import useAddUser from "@/hooks/useAddUser";
+import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
 
 type FormData = z.infer<typeof addUserSchema>;
 
 export default function AddUserDialog() {
+  const addUser = useAddUser();
+  const [joiningKey, setJoiningKey] = useState<string>();
+  const { toast } = useToast();
   const form = useForm<FormData>({
     defaultValues: {
       email: "",
@@ -35,7 +41,27 @@ export default function AddUserDialog() {
   });
 
   function onSubmit(data: FormData) {
-    console.log({ data });
+    addUser.mutate(data, {
+      onError: (error: unknown) => {
+        console.error(error);
+        toast({
+          title: "Error while creating Joining id",
+          description: "Please check network connect and try again",
+        });
+      },
+      onSuccess: (data) => {
+        toast({
+          title: data.status
+            ? "Joining id Created"
+            : "Error while creating Joining id",
+          description: !data.status ? data.message : data.joiningId,
+        });
+        setJoiningKey(data.joiningId);
+        if (!!data.status) {
+          form.reset();
+        }
+      },
+    });
   }
 
   return (
@@ -74,7 +100,13 @@ export default function AddUserDialog() {
             />
           </form>
         </Form>
-        <Button type="submit" form="add-user" className="w-fit ml-auto">
+        {joiningKey && <p>Joining key: {joiningKey}</p>}
+        <Button
+          isLoading={addUser.isLoading}
+          type="submit"
+          form="add-user"
+          className="w-fit ml-auto"
+        >
           Add User
         </Button>
       </DialogContent>
