@@ -12,6 +12,7 @@ import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import useMyUser, { useInvalidateMyUser } from "@/hooks/useMyUser";
 import TaskCard, { IListItem } from "@/components/taskCard";
+import useTaskStatusUpdate from "@/hooks/useTaskStatusUpdate";
 
 interface ITaskList {
   [index: string]: {
@@ -22,6 +23,7 @@ interface ITaskList {
 }
 
 export default function Tasks() {
+  const updateTask = useTaskStatusUpdate();
   const myUser = useMyUser();
   const invalidateMyUser = useInvalidateMyUser();
   const ReloadIcon = Icons["reload"];
@@ -140,6 +142,10 @@ export default function Tasks() {
         displayName: end.displayName,
         list: newEndList,
       };
+      // API update
+      const itemId = start.list[source.index]._id;
+      const status = end.id;
+      updateTask.mutate({ id: itemId, type: status });
 
       // Update the state
       setColumns((state) => ({
@@ -169,11 +175,11 @@ export default function Tasks() {
             <Droppable droppableId={col.id} key={col.id}>
               {(provided) => (
                 <div
-                  className="bg-primary-foreground border p-4 flex flex-col gap-3 rounded-sm"
+                  className="bg-primary-foreground border p-4 flex flex-col rounded-sm"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  <p className="select-none">{col.displayName}</p>
+                  <p className="select-none mb-3">{col.displayName}</p>
                   {col.list.map((task, index) => (
                     <Draggable
                       draggableId={task._id}
@@ -182,6 +188,7 @@ export default function Tasks() {
                     >
                       {(provided) => (
                         <div
+                          className="mb-3"
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
