@@ -1,4 +1,7 @@
+import { useRouter } from "next/navigation";
+
 import { cn } from "@/lib/utils";
+import { Links } from "@/config/links";
 
 export interface IListItem {
   _id: string;
@@ -8,9 +11,16 @@ export interface IListItem {
   className: string;
 }
 
-export default function TaskCard({ name, description, className }: IListItem) {
+export default function TaskCard({
+  name,
+  description,
+  className,
+  _id,
+}: IListItem) {
+  const router = useRouter();
   return (
     <div
+      onClick={() => router.push(`${Links.task.href}/${_id}`)}
       className={cn(
         "bg-background border py-2 px-3 select-none rounded",
         className
