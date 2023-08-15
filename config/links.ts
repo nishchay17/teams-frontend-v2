@@ -15,6 +15,12 @@ export const Links = {
     title: "Tasks",
     icon: "checkBox",
   },
+  archiveTask: {
+    href: "/dashboard/tasks/archive",
+    name: "archiveTask",
+    title: "Task Archive",
+    icon: "archive",
+  },
   addTask: {
     title: "Add Task",
     name: "addTask",

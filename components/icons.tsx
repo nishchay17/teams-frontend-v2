@@ -10,6 +10,7 @@ import {
   ListPlus,
   Settings,
   RotateCw,
+  Archive,
   type Icon as LucideIcon,
   ArrowLeft,
 } from "lucide-react";
@@ -24,6 +25,7 @@ export const Icons: { [key: string]: Icon } = {
   profile: User2,
   file: File,
   add: PlusIcon,
+  archive: Archive,
   manage: Kanban,
   setting: Settings,
   "add-list": ListPlus,
