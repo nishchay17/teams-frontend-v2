@@ -129,10 +129,9 @@ export default function BucketPage() {
               />
             </div>
             <FileDropzone
-              onDrop={(files: FileList) => {
-                console.log({ files });
+              onDrop={(files?: FileList) => {
                 setFileError("");
-                setFile(files.item(0));
+                setFile(files?.item(0));
               }}
               text={file?.name}
               error={fileError}
