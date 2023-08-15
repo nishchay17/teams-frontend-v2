@@ -1,7 +1,8 @@
 import { useRef, useEffect, useId, useState } from "react";
+import { Button } from "./ui/button";
 
 interface Props {
-  onDrop: (files: FileList) => void;
+  onDrop: (files?: FileList) => void;
   text?: string;
   error?: string;
 }
@@ -58,7 +59,7 @@ export default function FileDropzone({
       <label htmlFor={`file-${id}`}>
         <div
           ref={drop}
-          className="rounded-md border border-input flex justify-center items-center h-full"
+          className="rounded-md border border-input flex justify-center items-center h-full relative"
         >
           {!!error ? (
             <p className="text-red-400">{error}</p>
@@ -67,6 +68,15 @@ export default function FileDropzone({
               {!!text ? text : "Drop your images here"}
             </p>
           )}
+          <Button
+            className="absolute right-1 bottom-1"
+            type="button"
+            onClick={() => onDrop(undefined)}
+            size="sm"
+            variant="ghost"
+          >
+            Remove
+          </Button>
         </div>
       </label>
     </>

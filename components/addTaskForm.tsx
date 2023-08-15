@@ -17,7 +17,7 @@ type AddTaskProps = {
   form: UseFormReturn<any, any, undefined>;
   onSubmit: (data: FormData) => Promise<void>;
   getList: () => Promise<unknown>;
-  handleFileChange: (file: File) => void;
+  handleFileChange: (file?: File) => void;
   file?: File;
   formName: string;
 };
@@ -86,7 +86,9 @@ export default function AddTaskForm({
             />
           </div>
           <FileDropzone
-            onDrop={(files: FileList) => handleFileChange(files[0])}
+            onDrop={(files?: FileList) =>
+              handleFileChange(files?.[0] ?? undefined)
+            }
             text={file?.name}
           />
         </div>

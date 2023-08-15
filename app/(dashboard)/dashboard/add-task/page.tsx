@@ -77,7 +77,7 @@ export default function AddTask() {
         formName={FORM_ID}
         onSubmit={onSubmit}
         getList={getList}
-        handleFileChange={(file: File) => setFile(file)}
+        handleFileChange={(file?: File) => setFile(file)}
         file={file}
       />
     </>
