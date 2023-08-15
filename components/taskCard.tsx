@@ -38,8 +38,8 @@ export default function TaskCard({
         className
       )}
     >
-      <p className="mb-1 text-sm font-medium">{name}</p>
-      <p className="text-xs opacity-90">{description}</p>
+      <p className="mb-1 text-sm font-medium line-clamp-2">{name}</p>
+      <p className="text-xs opacity-90 line-clamp-3">{description}</p>
     </div>
   );
 }
