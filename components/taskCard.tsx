@@ -2,13 +2,15 @@ import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { Links } from "@/config/links";
+import { Skeleton } from "./ui/skeleton";
 
 export interface IListItem {
   _id: string;
-  updatedAt: string;
+  updatedAt?: string;
   name: string;
   description: string;
-  className: string;
+  className?: string;
+  isLoading: boolean;
 }
 
 export default function TaskCard({
@@ -16,8 +18,18 @@ export default function TaskCard({
   description,
   className,
   _id,
+  isLoading,
 }: IListItem) {
   const router = useRouter();
+  if (isLoading) {
+    return (
+      <div className={"bg-background border p-3 select-none rounded"}>
+        <Skeleton className="mb-2 text-xs">Name loading</Skeleton>
+        <Skeleton className="h-3 mb-1">Description loading</Skeleton>
+        <Skeleton className="h-3">Description loading</Skeleton>
+      </div>
+    );
+  }
   return (
     <div
       onClick={() => router.push(`${Links.task.href}/${_id}`)}

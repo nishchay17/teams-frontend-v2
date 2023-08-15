@@ -22,6 +22,49 @@ interface ITaskList {
   };
 }
 
+function TaskSkeleton() {
+  const data: {
+    [key: string]: { id: string; displayName: string; list: number[] };
+  } = {
+    new: {
+      id: "new",
+      displayName: "New",
+      list: Array(2).fill(1),
+    },
+    inprogress: {
+      id: "inprogress",
+      displayName: "In Progress",
+      list: Array(3).fill(1),
+    },
+    complete: {
+      id: "complete",
+      displayName: "Complete",
+      list: Array(1).fill(1),
+    },
+  };
+  return (
+    <div className="grid grid-cols-3 gap-5 mb-5">
+      {Object.keys(data).map((title) => (
+        <div
+          key={title}
+          className="bg-primary-foreground border p-4 flex gap-3 flex-col rounded-sm"
+        >
+          <p className="select-none mb-3">{data[title].displayName}</p>
+          {data[title].list.map((_, key) => (
+            <TaskCard
+              key={key}
+              isLoading
+              name={"loading"}
+              description="loading"
+              _id="loading"
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function Tasks() {
   const updateTask = useTaskStatusUpdate();
   const myUser = useMyUser();
@@ -169,42 +212,46 @@ export default function Tasks() {
           {!myUser.isFetching && <ReloadIcon size="1rem" />}
         </Button>
       </div>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className="grid grid-cols-3 gap-5 mb-5">
-          {Object.values(columns).map((col) => (
-            <Droppable droppableId={col.id} key={col.id}>
-              {(provided) => (
-                <div
-                  className="bg-primary-foreground border p-4 flex flex-col rounded-sm"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  <p className="select-none mb-3">{col.displayName}</p>
-                  {col.list.map((task, index) => (
-                    <Draggable
-                      draggableId={task._id}
-                      index={index}
-                      key={task._id}
-                    >
-                      {(provided) => (
-                        <div
-                          className="mb-3"
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <TaskCard {...task} />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          ))}
-        </div>
-      </DragDropContext>
+      {myUser.isLoading ? (
+        <TaskSkeleton />
+      ) : (
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className="grid grid-cols-3 gap-5 mb-5">
+            {Object.values(columns).map((col) => (
+              <Droppable droppableId={col.id} key={col.id}>
+                {(provided) => (
+                  <div
+                    className="bg-primary-foreground border p-4 flex flex-col rounded-sm"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    <p className="select-none mb-3">{col.displayName}</p>
+                    {col.list.map((task, index) => (
+                      <Draggable
+                        draggableId={task._id}
+                        index={index}
+                        key={task._id}
+                      >
+                        {(provided) => (
+                          <div
+                            className="mb-3"
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <TaskCard {...task} />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            ))}
+          </div>
+        </DragDropContext>
+      )}
     </>
   );
 }
