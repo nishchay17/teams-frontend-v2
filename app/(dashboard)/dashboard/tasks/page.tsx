@@ -52,6 +52,7 @@ function TaskSkeleton() {
           <p className="select-none mb-3">{data[title].displayName}</p>
           {data[title].list.map((_, key) => (
             <TaskCard
+              priority="loading"
               key={key}
               isLoading
               name={"loading"}
@@ -101,6 +102,7 @@ export default function Tasks() {
           name: data.name,
           updatedAt: data.updatedAt,
           description: data.description,
+          priority: data.priority,
         })
       );
       newState.complete.list = myUser.data.user.taskCompleted.map(
@@ -109,6 +111,7 @@ export default function Tasks() {
           name: data.name,
           updatedAt: data.updatedAt,
           description: data.description,
+          priority: data.priority,
         })
       );
       newState.inprogress.list = myUser.data.user.taskInProgress.map(
@@ -117,6 +120,7 @@ export default function Tasks() {
           name: data.name,
           updatedAt: data.updatedAt,
           description: data.description,
+          priority: data.priority,
         })
       );
       setColumns(newState);

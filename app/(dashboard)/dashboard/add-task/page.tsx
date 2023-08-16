@@ -25,6 +25,7 @@ export default function AddTask() {
       name: "",
       assignedTo: { value: "", label: "" },
       description: "",
+      priority: { label: "Medium", value: "medium" },
     },
     resolver: zodResolver(addTaskSchema),
   });

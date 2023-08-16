@@ -11,6 +11,7 @@ export interface IListItem {
   description: string;
   className?: string;
   isLoading: boolean;
+  priority: string;
 }
 
 export default function TaskCard({
@@ -19,8 +20,15 @@ export default function TaskCard({
   className,
   _id,
   isLoading,
+  priority,
 }: IListItem) {
   const router = useRouter();
+  const priorityColor: { [key: string]: string } = {
+    high: "bg-red-500",
+    medium: "bg-orange-400",
+    low: "bg-green-400",
+  };
+
   if (isLoading) {
     return (
       <div className={"bg-background border p-3 select-none rounded"}>
@@ -33,13 +41,22 @@ export default function TaskCard({
   return (
     <div
       onClick={() => router.push(`${Links.task.href}/${_id}`)}
-      className={cn(
-        "bg-background border py-2 px-3 select-none rounded",
-        className
-      )}
+      className={cn("bg-background border p-3 select-none rounded", className)}
     >
-      <p className="mb-1 text-sm font-medium line-clamp-2">{name}</p>
-      <p className="text-xs opacity-90 line-clamp-3">{description}</p>
+      <div className="flex justify-between items-start mb-2 gap-1">
+        <p className="text-sm font-medium line-clamp-2 capitalize">{name}</p>
+        <p
+          className={cn(
+            "text-xs w-fit px-2 py-[0.15rem] rounded-md capitalize text-black font-medium",
+            priorityColor[priority]
+          )}
+        >
+          {priority}
+        </p>
+      </div>
+      <p className="text-xs opacity-90 line-clamp-3 capitalize">
+        {description}
+      </p>
     </div>
   );
 }

@@ -18,6 +18,7 @@ import AddTaskForm from "@/components/addTaskForm";
 import { useInvalidateMyUser } from "@/hooks/useMyUser";
 import useEditTask from "@/hooks/useEditTask";
 import useArchiveTask from "@/hooks/useArchiveTask";
+import { capitalize } from "@/lib/utils";
 
 type FormData = z.infer<typeof addTaskSchema>;
 type Props = {
@@ -41,12 +42,17 @@ export default function Task({ params: { id } }: Props) {
 
   useEffect(() => {
     if (!task.isLoading && task.data.status) {
+      const priority = task.data.task.priority;
       form.reset({
         name: task.data.task.name,
         description: task.data.task.description,
         assignedTo: {
           value: task.data.task.assignedTo._id,
           label: task.data.task.assignedTo.name,
+        },
+        priority: {
+          value: priority,
+          label: capitalize(priority),
         },
         file: "",
       });

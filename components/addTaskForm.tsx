@@ -60,7 +60,41 @@ export default function AddTaskForm({
                 <FormItem>
                   <FormLabel>Assigned To</FormLabel>
                   <FormControl>
-                    <Select defaultOptions loadOptions={getList} {...field} />
+                    <Select
+                      defaultOptions
+                      isAsync
+                      loadOptions={getList}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="priority"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Priority</FormLabel>
+                  <FormControl>
+                    <Select
+                      options={[
+                        {
+                          label: "High",
+                          value: "high",
+                        },
+                        {
+                          label: "Medium",
+                          value: "medium",
+                        },
+                        {
+                          label: "Low",
+                          value: "low",
+                        },
+                      ]}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

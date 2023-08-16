@@ -16,6 +16,12 @@ export const addTaskSchema: any = z.object({
       value: z.string().trim().nonempty(),
     })
     .transform((v) => v.value),
+  priority: z
+    .object({
+      label: z.string().trim().nonempty(),
+      value: z.string().trim().nonempty(),
+    })
+    .transform((v) => v.value),
   description: z.string().trim().nonempty(),
   file: z.any().optional(),
 });

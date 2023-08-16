@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { forwardRef, useId } from "react";
 import AsyncSelect from "react-select/async";
+import ReactSelect from "react-select";
 
 const Select = forwardRef<HTMLSelectElement, any>((props, ref) => {
   const controlStyles = {
@@ -24,9 +25,9 @@ const Select = forwardRef<HTMLSelectElement, any>((props, ref) => {
     focus: "bg-gray-100 dark:bg-gray-900",
     selected: "bg-gray-200 dark:bg-gray-800",
   };
-
+  const Selected = !!props.isAsync ? AsyncSelect : ReactSelect;
   return (
-    <AsyncSelect
+    <Selected
       instanceId={useId()}
       ref={ref}
       unstyled
