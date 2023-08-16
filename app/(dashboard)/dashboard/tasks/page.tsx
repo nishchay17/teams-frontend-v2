@@ -209,6 +209,7 @@ export default function Tasks() {
       <div className="flex justify-between items-center mb-7">
         <h2 className="text-2xl">Tasks</h2>
         <Button
+          aria-label="reload tasks"
           onClick={invalidateMyUser}
           variant="ghost"
           isLoading={myUser.isFetching}

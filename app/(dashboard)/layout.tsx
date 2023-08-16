@@ -40,7 +40,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <TaskStats />
               <Menubar>
                 <MenubarMenu>
-                  <MenubarTrigger>
+                  <MenubarTrigger aria-label="setting">
                     <SettingIcon />
                   </MenubarTrigger>
                   <MenubarContent>
