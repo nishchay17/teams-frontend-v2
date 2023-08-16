@@ -47,7 +47,7 @@ function TaskSkeleton() {
       {Object.keys(data).map((title) => (
         <div
           key={title}
-          className="bg-primary-foreground border p-4 flex gap-3 flex-col rounded-sm"
+          className="bg-background border p-4 flex gap-3 flex-col rounded-sm"
         >
           <p className="select-none mb-3">{data[title].displayName}</p>
           {data[title].list.map((_, key) => (
@@ -226,7 +226,7 @@ export default function Tasks() {
               <Droppable droppableId={col.id} key={col.id}>
                 {(provided) => (
                   <div
-                    className="bg-primary-foreground border p-4 flex flex-col rounded-sm"
+                    className="bg-background border p-4 flex flex-col rounded-sm"
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >

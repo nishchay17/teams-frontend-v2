@@ -31,7 +31,7 @@ export default function TaskCard({
 
   if (isLoading) {
     return (
-      <div className={"bg-background border p-3 select-none rounded"}>
+      <div className={"bg-background border p-3 select-none rounded shadow-sm"}>
         <Skeleton className="mb-2 text-xs">Name loading</Skeleton>
         <Skeleton className="h-3 mb-1">Description loading</Skeleton>
         <Skeleton className="h-3">Description loading</Skeleton>
@@ -41,7 +41,10 @@ export default function TaskCard({
   return (
     <div
       onClick={() => router.push(`${Links.task.href}/${_id}`)}
-      className={cn("bg-background border p-3 select-none rounded", className)}
+      className={cn(
+        "bg-background border p-3 select-none rounded shadow-sm",
+        className
+      )}
     >
       <div className="flex justify-between items-start mb-2 gap-1">
         <p className="text-sm font-medium line-clamp-2 capitalize">{name}</p>
