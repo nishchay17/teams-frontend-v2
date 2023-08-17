@@ -6,7 +6,7 @@ import { apiLinks } from "@/config/api-links";
 async function fetchBucketItems() {
   const userData = await getSession();
   return (
-    await fetch(apiLinks.getBucketItem, {
+    await fetch(apiLinks.getBucketItems, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${userData?.user.token}`,
