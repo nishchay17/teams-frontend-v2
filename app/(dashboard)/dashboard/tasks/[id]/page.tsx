@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Links } from "@/config/links";
@@ -19,6 +20,7 @@ import { useInvalidateMyUser } from "@/hooks/useMyUser";
 import useEditTask from "@/hooks/useEditTask";
 import useArchiveTask from "@/hooks/useArchiveTask";
 import { capitalize } from "@/lib/utils";
+import useTaskDelete from "@/hooks/useTaskDelete";
 
 type FormData = z.infer<typeof addTaskSchema>;
 type Props = {
@@ -26,10 +28,12 @@ type Props = {
 };
 
 export default function Task({ params: { id } }: Props) {
+  const router = useRouter();
   const ArrowLeft = Icons["arrowLeft"];
   const task = useFetchTaskById(id);
   const FORM_ID = "edit-task";
   const editTask = useEditTask();
+  const deleteTask = useTaskDelete();
   const archiveTask = useArchiveTask();
   const allUsers = useAllUser();
   const invalidateMyUser = useInvalidateMyUser();
@@ -113,12 +117,42 @@ export default function Task({ params: { id } }: Props) {
             Archive
           </Button>
           <Button
+            className="mr-2"
             form={FORM_ID}
             type="submit"
             isLoading={editTask.isLoading}
             disabled={!(form.formState.isDirty || isImageChanged)}
           >
             Save edit
+          </Button>
+          <Button
+            variant="danger"
+            type="button"
+            onClick={() =>
+              deleteTask.mutate(id, {
+                onSuccess: (data) => {
+                  toast({
+                    title: data.status
+                      ? "Task Deleted, redirecting"
+                      : "Error while deleting task",
+                    description: data.message,
+                  });
+                  invalidateMyUser();
+                  setTimeout(() => {
+                    router.push(Links.task.href);
+                  }, 1000);
+                },
+                onError: () => {
+                  toast({
+                    title: "Error while deleting Task",
+                    description: "Please check network connect and try again",
+                  });
+                },
+              })
+            }
+            isLoading={deleteTask.isLoading}
+          >
+            Delete task
           </Button>
         </div>
       </div>

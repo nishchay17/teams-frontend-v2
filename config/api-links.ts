@@ -9,6 +9,7 @@ export const apiLinks = {
   taskInProcess: BASE_URL + "/task/inProcess/",
   taskAssigned: BASE_URL + "/task/isAssigned/",
   taskCompleted: BASE_URL + "/task/isCompleted/",
+  taskDelete: BASE_URL + "/task/delete/",
   login: BASE_URL + "/user/login",
   allUser: BASE_URL + "/user/all",
   myUser: BASE_URL + "/user/me",
