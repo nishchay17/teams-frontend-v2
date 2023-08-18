@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
+import { cn, copyIt } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Form,
@@ -101,14 +101,21 @@ export default function AddUserDialog() {
           </form>
         </Form>
         {joiningKey && <p>Joining key: {joiningKey}</p>}
-        <Button
-          isLoading={addUser.isLoading}
-          type="submit"
-          form="add-user"
-          className="w-fit ml-auto"
-        >
-          Add User
-        </Button>
+        <div className="flex items-center gap-2 ml-auto">
+          {joiningKey ? (
+            <Button variant="outline" onClick={() => copyIt(joiningKey)}>
+              Copy joining key
+            </Button>
+          ) : null}
+          <Button
+            isLoading={addUser.isLoading}
+            type="submit"
+            form="add-user"
+            className="w-fit"
+          >
+            Add User
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
   );
