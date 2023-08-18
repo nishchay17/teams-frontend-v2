@@ -5,6 +5,7 @@ export const apiLinks = {
   getTask: BASE_URL + "/task/",
   editTask: BASE_URL + "/task/",
   archiveTask: BASE_URL + "/task/archive/",
+  archiveTasks: BASE_URL + "/task/archived",
   taskInProcess: BASE_URL + "/task/inProcess/",
   taskAssigned: BASE_URL + "/task/isAssigned/",
   taskCompleted: BASE_URL + "/task/isCompleted/",

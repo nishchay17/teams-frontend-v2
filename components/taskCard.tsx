@@ -42,7 +42,7 @@ export default function TaskCard({
     <div
       onClick={() => router.push(`${Links.task.href}/${_id}`)}
       className={cn(
-        "bg-background border p-3 select-none rounded shadow-sm",
+        "bg-background border p-3 select-none rounded shadow-sm cursor-pointer",
         className
       )}
     >
