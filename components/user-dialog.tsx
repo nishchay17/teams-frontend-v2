@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import {
   Dialog,
   DialogContent,
@@ -11,6 +13,10 @@ import {
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { Button, buttonVariants } from "@/components/ui/button";
+import useDeleteUser from "@/hooks/useDeleteUser";
+import { useToast } from "@/components/ui/use-toast";
+import { useInvalidateMyUser } from "@/hooks/useMyUser";
+import { Links } from "@/config/links";
 
 export default function UserDialog({
   user,
@@ -23,6 +29,11 @@ export default function UserDialog({
   isLoading: boolean;
 }) {
   const Loader = Icons["loader"];
+  const deteleUser = useDeleteUser();
+  const { toast } = useToast();
+  const invalidateMyUser = useInvalidateMyUser();
+  const router = useRouter();
+
   return (
     <Dialog>
       <DialogTrigger
@@ -39,7 +50,34 @@ export default function UserDialog({
         <DialogDescription>
           This will <strong>permanetly delete</strong> user: {user?.name}
         </DialogDescription>
-        <Button variant="danger" className="w-fit ml-auto">
+        <Button
+          variant="danger"
+          className="w-fit ml-auto"
+          onClick={() =>
+            user?._id
+              ? deteleUser.mutate(user?._id, {
+                  onSuccess: (data) => {
+                    toast({
+                      title: data.status
+                        ? "User Deleted, redirecting"
+                        : "Error while deleting user",
+                      description: data.message,
+                    });
+                    invalidateMyUser();
+                    setTimeout(() => {
+                      router.push(Links.manageUser.href);
+                    }, 1000);
+                  },
+                  onError: () => {
+                    toast({
+                      title: "Error while deleting User",
+                      description: "Please check network connect and try again",
+                    });
+                  },
+                })
+              : null
+          }
+        >
           Yes, delete this
         </Button>
       </DialogContent>
