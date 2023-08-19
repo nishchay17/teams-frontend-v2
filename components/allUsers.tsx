@@ -1,7 +1,10 @@
+import { useRouter } from "next/navigation";
+
 import { Links } from "@/config/links";
 import useAllUser from "@/hooks/useAllUser";
-import { useRouter } from "next/navigation";
 import { Skeleton } from "./ui/skeleton";
+import Pagination from "./ui/pagination";
+import { useState } from "react";
 
 type UserType = {
   _id: string;
@@ -39,7 +42,13 @@ function UserProfileCard({
 }
 
 export default function AllUsers() {
-  const allUsers = useAllUser();
+  const [pageNo, setPageNo] = useState(0);
+  const PER_PAGE = 16;
+  const allUsers = useAllUser(pageNo, PER_PAGE);
+
+  function onPageChange({ selected }: { selected: number }) {
+    setPageNo(selected);
+  }
 
   if (allUsers.isLoading) {
     return (
@@ -58,22 +67,33 @@ export default function AllUsers() {
     );
   }
 
+  if (allUsers.isError || !allUsers.data.status) {
+    return <p>Some error</p>;
+  }
+
   return (
-    <div className="grid grid-cols-4 gap-4 mb-5">
-      {allUsers.data.users.map((data: UserType) => (
-        <UserProfileCard
-          key={data._id}
-          _id={data._id}
-          username={data.name}
-          total={
-            data.taskAssigned.length +
-            data.taskInProgress.length +
-            data.taskCompleted.length
-          }
-          completed={data.taskCompleted.length}
-          inprogress={data.taskInProgress.length}
-        />
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-4 gap-4 mb-5">
+        {allUsers.data.users.map((data: UserType) => (
+          <UserProfileCard
+            key={data._id}
+            _id={data._id}
+            username={data.name}
+            total={
+              data.taskAssigned.length +
+              data.taskInProgress.length +
+              data.taskCompleted.length
+            }
+            completed={data.taskCompleted.length}
+            inprogress={data.taskInProgress.length}
+          />
+        ))}
+      </div>
+      <Pagination
+        onPageChange={onPageChange}
+        perPage={PER_PAGE}
+        totalCount={allUsers.data.pagination.count}
+      />
+    </>
   );
 }

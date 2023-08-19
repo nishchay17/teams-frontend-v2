@@ -1,7 +1,9 @@
 "use client";
 
 import TaskCard from "@/components/taskCard";
+import Pagination from "@/components/ui/pagination";
 import useArchiveTasks from "@/hooks/useArchivedTasks";
+import { useState } from "react";
 
 type Props = {};
 
@@ -17,6 +19,7 @@ function TaskLoading() {
           name={"loading"}
           description="loading"
           _id="loading"
+          className="mb-1"
         />
       ))}
     </>
@@ -24,23 +27,41 @@ function TaskLoading() {
 }
 
 export default function ArchiveTask({}: Props) {
-  const archiveTasks = useArchiveTasks();
+  const [pageNo, setPageNo] = useState(0);
+  const PER_PAGE = 10;
+  const archiveTasks = useArchiveTasks(pageNo, PER_PAGE);
 
-  if (archiveTasks.isError) {
+  function onPageChange({ selected }: { selected: number }) {
+    setPageNo(selected);
+  }
+
+  if (archiveTasks.isLoading) {
+    return (
+      <>
+        <h2 className="text-2xl mb-7">Archived Tasks</h2>
+        <TaskLoading />
+      </>
+    );
+  }
+
+  if (archiveTasks.isError || !archiveTasks.data.status) {
     return <p>Error while loading</p>;
   }
-  const archiveTasksList = archiveTasks.data?.tasks;
+
+  const archiveTasksList = archiveTasks.data.tasks;
 
   return (
     <>
       <h2 className="text-2xl mb-7">Archived Tasks</h2>
-      {archiveTasks.isLoading ? (
-        <TaskLoading />
-      ) : (
-        archiveTasksList.map((task: any, key: string) => (
-          <TaskCard {...task} key={key} className="mb-1" />
-        ))
-      )}
+      {archiveTasksList.map((task: any) => (
+        <TaskCard {...task} key={task._id} className="mb-1" />
+      ))}
+      <Pagination
+        className="my-5"
+        onPageChange={onPageChange}
+        perPage={PER_PAGE}
+        totalCount={archiveTasks.data.pagination.count}
+      />
     </>
   );
 }

@@ -3,10 +3,11 @@ import { getSession, signOut } from "next-auth/react";
 
 import { apiLinks } from "@/config/api-links";
 
-async function fetchAllUsers() {
+async function fetchAllUsers({ queryKey }: { queryKey: string[] }) {
   const userData = await getSession();
+  const [_, pageNo, perPage] = queryKey;
   return (
-    await fetch(apiLinks.allUser, {
+    await fetch(`${apiLinks.allUser}?pageNo=${pageNo}&perPage=${perPage}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${userData?.user.token}`,
@@ -20,6 +21,10 @@ async function fetchAllUsers() {
   ).json();
 }
 
-export default function useAllUser() {
-  return useQuery("all-user", fetchAllUsers);
+export default function useAllUser(pageNo: number = 0, perPage: number = 16) {
+  return useQuery({
+    queryKey: ["all-user", pageNo.toString(), perPage.toString()],
+    queryFn: fetchAllUsers,
+    keepPreviousData: true,
+  });
 }

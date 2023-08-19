@@ -31,7 +31,12 @@ export default function TaskCard({
 
   if (isLoading) {
     return (
-      <div className={"bg-background border p-3 select-none rounded shadow-sm"}>
+      <div
+        className={cn(
+          "bg-background border p-3 select-none rounded shadow-sm",
+          className
+        )}
+      >
         <Skeleton className="mb-2 text-xs">Name loading</Skeleton>
         <Skeleton className="h-3 mb-1">Description loading</Skeleton>
         <Skeleton className="h-3">Description loading</Skeleton>
