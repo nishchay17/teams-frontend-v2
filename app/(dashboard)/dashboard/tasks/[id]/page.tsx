@@ -115,9 +115,26 @@ export default function Task({ params: { id } }: Props) {
           <Button
             className="mr-2"
             variant="secondary"
-            onClick={() => archiveTask.mutate(id)}
+            onClick={() =>
+              archiveTask.mutate(id, {
+                onSuccess: (data) => {
+                  toast({
+                    title: data.status ? "Done" : "Error while deleting task",
+                    description: data.message,
+                  });
+                  invalidateMyUser();
+                  task.refetch();
+                },
+                onError: () => {
+                  toast({
+                    title: "Error while archive/unarchive Task",
+                    description: "Please check network connect and try again",
+                  });
+                },
+              })
+            }
           >
-            Archive
+            {task.data.task.isArchived ? "Unarchive " : "Archive"}
           </Button>
           <Button
             className="mr-2"
@@ -142,7 +159,7 @@ export default function Task({ params: { id } }: Props) {
                   });
                   invalidateMyUser();
                   setTimeout(() => {
-                    router.push(Links.task.href);
+                    router.push(!!back ? back : Links.task.href);
                   }, 1000);
                 },
                 onError: () => {
