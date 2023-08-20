@@ -12,6 +12,7 @@ export interface IListItem {
   className?: string;
   isLoading: boolean;
   priority: string;
+  backTo?: string;
 }
 
 export default function TaskCard({
@@ -21,6 +22,7 @@ export default function TaskCard({
   _id,
   isLoading,
   priority,
+  backTo,
 }: IListItem) {
   const router = useRouter();
   const priorityColor: { [key: string]: string } = {
@@ -45,7 +47,7 @@ export default function TaskCard({
   }
   return (
     <div
-      onClick={() => router.push(`${Links.task.href}/${_id}`)}
+      onClick={() => router.push(`${Links.task.href}/${_id}?back-to=${backTo}`)}
       className={cn(
         "bg-background border p-3 select-none rounded shadow-sm cursor-pointer",
         className

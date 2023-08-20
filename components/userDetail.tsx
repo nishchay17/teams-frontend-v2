@@ -1,3 +1,4 @@
+import { Links } from "@/config/links";
 import TaskCard from "./taskCard";
 
 type Props = {
@@ -13,19 +14,31 @@ export default function UserDetail({ user }: Props) {
         <div className="bg-primary-foreground border p-4 flex flex-col gap-3 rounded-sm">
           <p className="select-none">New</p>
           {user.taskAssigned.map((task: any, index: number) => (
-            <TaskCard key={index} {...task} />
+            <TaskCard
+              key={index}
+              {...task}
+              backTo={`${Links.manageUser.href}/${user._id}`}
+            />
           ))}
         </div>
         <div className="bg-primary-foreground border p-4 flex flex-col gap-3 rounded-sm">
           <p className="select-none">New</p>
           {user.taskCompleted.map((task: any, index: number) => (
-            <TaskCard key={index} {...task} />
+            <TaskCard
+              key={index}
+              {...task}
+              backTo={`${Links.manageUser.href}/${user._id}`}
+            />
           ))}
         </div>
         <div className="bg-primary-foreground border p-4 flex flex-col gap-3 rounded-sm">
           <p className="select-none">New</p>
           {user.taskInProgress.map((task: any, index: number) => (
-            <TaskCard key={index} {...task} />
+            <TaskCard
+              key={index}
+              {...task}
+              backTo={`${Links.manageUser.href}/${user._id}`}
+            />
           ))}
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import TaskCard from "@/components/taskCard";
 import Pagination from "@/components/ui/pagination";
+import { Links } from "@/config/links";
 import useArchiveTasks from "@/hooks/useArchivedTasks";
 import { useState } from "react";
 
@@ -54,7 +55,12 @@ export default function ArchiveTask({}: Props) {
     <>
       <h2 className="text-2xl mb-7">Archived Tasks</h2>
       {archiveTasksList.map((task: any) => (
-        <TaskCard {...task} key={task._id} className="mb-1" />
+        <TaskCard
+          {...task}
+          key={task._id}
+          className="mb-1"
+          backTo={Links.archiveTask.href}
+        />
       ))}
       <Pagination
         className="my-5"

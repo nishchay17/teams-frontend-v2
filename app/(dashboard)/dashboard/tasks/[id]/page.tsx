@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Links } from "@/config/links";
@@ -40,6 +40,7 @@ export default function Task({ params: { id } }: Props) {
   const [file, setFile] = useState<File>();
   const [isImageChanged, setIsImageChanged] = useState<boolean>(false);
   const { toast } = useToast();
+  const searchParams = useSearchParams();
   const form = useForm<FormData>({
     resolver: zodResolver(addTaskSchema),
   });
@@ -99,10 +100,12 @@ export default function Task({ params: { id } }: Props) {
     return <>loading</>;
   }
 
+  const back = searchParams.get("back-to")?.trim();
+
   return (
     <>
       <div className="flex justify-between items-center mb-7">
-        <Link href={Links.task.href}>
+        <Link href={!!back ? back : Links.task.href}>
           <Button variant="outline">
             <ArrowLeft size="1rem" className="mr-2" />
             Back

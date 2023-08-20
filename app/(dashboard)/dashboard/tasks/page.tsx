@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import useMyUser, { useInvalidateMyUser } from "@/hooks/useMyUser";
 import TaskCard, { IListItem } from "@/components/taskCard";
 import useTaskStatusUpdate from "@/hooks/useTaskStatusUpdate";
+import { Links } from "@/config/links";
 
 interface ITaskList {
   [index: string]: {
@@ -244,7 +245,7 @@ export default function Tasks() {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                           >
-                            <TaskCard {...task} />
+                            <TaskCard {...task} backTo={Links.task.href} />
                           </div>
                         )}
                       </Draggable>
