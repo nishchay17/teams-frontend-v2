@@ -34,9 +34,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <h1 className="font-semibold text-lg">Teams Collab</h1>
             </div>
             <div className="flex gap-4 items-center">
-              <p className="border-2 h-fit text-xs font-medium mr-2 px-2 py-0.5 rounded">
+              {/* <p className="border-2 h-fit text-xs font-medium mr-2 px-2 py-0.5 rounded">
                 New tasks: 2
-              </p>
+              </p> */}
               <TaskStats />
               <Menubar>
                 <MenubarMenu>
