@@ -6,13 +6,13 @@ export default function Hero() {
   return (
     <main className="h-screen flex items-center justify-center">
       <div>
-        <h1 className="text-7xl font-semibold text-secondary-foreground text-center">
+        <h1 className="text-4xl sm:text-5xl px-4 md:text-7xl font-semibold text-secondary-foreground text-center">
           Reimagine how <br /> your{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 dark:from-yellow-300 to-orange-500 dark:to-orange-400">
             team colabs.
           </span>
         </h1>
-        <p className="text-center text-lg opacity-75 leading-6 mt-10">
+        <p className="text-center text-lg opacity-75 leading-6 mt-10 px-4">
           Teams Collab gets your team in-sync <br />
           with asingle platform for all your tasks.
         </p>

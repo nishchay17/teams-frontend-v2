@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 export default function CallForAction() {
   return (
     <div className="bg-secondary/60 py-20 text-center">
-      <p className="text-4xl font-semibold text-center mb-5">
+      <p className="text-2xl md:text-3xl lg:text-4xl px-4 font-semibold text-center mb-5">
         Ready to get started? <br />
         with{" "}
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 dark:from-yellow-300 to-orange-500 dark:to-orange-400">

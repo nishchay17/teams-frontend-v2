@@ -14,14 +14,14 @@ function FeatureCard({ title, description, icon, className }: FeatureType) {
     <div
       className={cn(
         className,
-        "border px-5 py-3 rounded-md cursor-pointer hover:bg-secondary transition-all duration-200"
+        "w-56 md:w-auto flex-shrink-0 border px-5 py-3 rounded-md cursor-pointer hover:bg-secondary transition-all duration-200"
       )}
     >
       <div className="flex items-center mb-1">
         <Icon size="1.25rem" color="rgb(234 88 12)" />
-        <h3 className="font-medium text-lg ml-2">{title}</h3>
+        <h3 className="font-medium text-base md:text-lg ml-2">{title}</h3>
       </div>
-      <p className="opacity-80">{description}</p>
+      <p className="opacity-80 text-sm md:text-base">{description}</p>
     </div>
   );
 }

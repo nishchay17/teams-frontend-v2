@@ -33,23 +33,25 @@ export default function LandingNav() {
 
   return (
     <nav
-      className={`w-full px-12 flex items-center shadow-sm justify-between bg-background h-14 fixed top-0 transition-all delay-150 duration-500 ease-in-out z-10 ${
+      className={` px-4 md:px-12 w-full shadow-sm bg-background fixed top-0 transition-all delay-150 duration-500 ease-in-out z-10 ${
         visible ? "translate-y-0" : "-translate-y-14"
       }`}
     >
-      <div className="flex items-center">
-        <Icons.hero height={16} width={16} />
-        <h2 className="text-sm ml-2">Team Collob</h2>
+      <div className="flex items-center justify-between h-14 w-full 2xl:max-w-[1600px] mx-auto">
+        <div className="flex items-center">
+          <Icons.hero height={16} width={16} />
+          <h2 className="text-sm ml-2">Team Collob</h2>
+        </div>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() =>
+            router.push(isAuth ? Links.task.href : Links.signin.href)
+          }
+        >
+          {isAuth ? "Dashboard" : "Login"}
+        </Button>
       </div>
-      <Button
-        size="sm"
-        variant="outline"
-        onClick={() =>
-          router.push(isAuth ? Links.task.href : Links.signin.href)
-        }
-      >
-        {isAuth ? "Dashboard" : "Login"}
-      </Button>
     </nav>
   );
 }
