@@ -15,6 +15,7 @@ export const apiLinks = {
   myUser: BASE_URL + "/user/me",
   addUser: BASE_URL + "/user/create-user",
   deleteUser: BASE_URL + "/user/delete/",
+  deleteBucket: BASE_URL + "/bucket/delete/",
   addBucketItem: BASE_URL + "/bucket/upload",
   getBucketItems: BASE_URL + "/bucket/get-all",
   getBucketItem: BASE_URL + "/bucket/",
