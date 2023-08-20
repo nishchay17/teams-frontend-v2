@@ -53,6 +53,7 @@ export default function UserDialog({
         <Button
           variant="danger"
           className="w-fit ml-auto"
+          isLoading={deteleUser.isLoading}
           onClick={() =>
             user?._id
               ? deteleUser.mutate(user?._id, {

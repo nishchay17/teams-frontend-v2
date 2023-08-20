@@ -54,6 +54,7 @@ export default function BucketItemDeleteDialog({
         <Button
           variant="danger"
           className="w-fit ml-auto"
+          isLoading={deteleBucket.isLoading}
           onClick={() =>
             bucketItem?._id
               ? deteleBucket.mutate(bucketItem?._id, {
