@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { Links } from "@/config/links";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -15,12 +17,16 @@ export default function Hero() {
           with asingle platform for all your tasks.
         </p>
         <div className="flex justify-center mt-14">
-          <Button size="sm" variant="outline" className="mr-3 shadow">
-            Registration
-          </Button>
-          <Button size="sm" variant="ghost">
-            Have a joining key?
-          </Button>
+          <Link href={Links.signup.href}>
+            <Button size="sm" variant="outline" className="mr-3 shadow">
+              Registration
+            </Button>
+          </Link>
+          <Link href={Links.signin.href}>
+            <Button size="sm" variant="ghost">
+              Have a joining key?
+            </Button>
+          </Link>
         </div>
       </div>
     </main>

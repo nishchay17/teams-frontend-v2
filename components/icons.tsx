@@ -11,6 +11,7 @@ import {
   Settings,
   RotateCw,
   Archive,
+  Moon,
   type Icon as LucideIcon,
   ArrowLeft,
 } from "lucide-react";
@@ -27,6 +28,7 @@ export const Icons: { [key: string]: Icon } = {
   add: PlusIcon,
   archive: Archive,
   manage: Kanban,
+  dark: Moon,
   setting: Settings,
   "add-list": ListPlus,
   reload: RotateCw,

@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="py-10 text-center bg-slate-900 text-white">
+    <footer className="py-10 text-center">
       Created by{" "}
       <a
         href="https://nishchay17.vercel.app"

@@ -12,7 +12,7 @@ export default function Tech() {
     "Zod",
   ] as const;
   return (
-    <section className="border-t mt-20 pt-20 pb-24">
+    <section className="border-t pt-20 pb-24">
       <p className="text-4xl font-semibold text-center mb-5">
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 ">
           Technologies
