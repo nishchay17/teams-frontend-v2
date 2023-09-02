@@ -15,6 +15,7 @@ async function createUserJoining(email: AddUserType) {
       method: "POST",
       headers: {
         Authorization: `Bearer ${userData?.user.token}`,
+        "Content-Type": "application/json",
       },
     }).then((res) => {
       if (res.status === 401) {

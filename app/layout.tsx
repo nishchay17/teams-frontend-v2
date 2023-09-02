@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Teams",
   description: "Teams: Collaborate and build team",
+  icons: ["/svg/logo.svg"],
 };
 
 export default function RootLayout({

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { signIn as nextSignIn, useSession } from "next-auth/react";
 import { redirect, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 import {
   Form,
@@ -28,6 +29,7 @@ function Signin() {
     redirect(Links.task.href);
   }
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const searchParams = useSearchParams();
   const form = useForm<FormData>({
@@ -39,6 +41,7 @@ function Signin() {
   });
 
   async function onSubmit(data: FormData) {
+    setIsLoading(true);
     const signinRes = await nextSignIn("credentials", {
       ...data,
       redirect: false,
@@ -50,6 +53,7 @@ function Signin() {
         description: signinRes.error,
       });
     }
+    setIsLoading(false);
   }
 
   return (
@@ -99,7 +103,7 @@ function Signin() {
               )}
             />
 
-            <Button className="w-full mt-4" type="submit">
+            <Button className="w-full mt-4" type="submit" isLoading={isLoading}>
               Submit
             </Button>
           </form>

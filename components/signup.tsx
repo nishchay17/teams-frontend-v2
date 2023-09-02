@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { useRouter } from "next/navigation";
 
 import {
   Form,
@@ -15,28 +16,61 @@ import {
 import { userSignupSchema } from "@/lib/validation/signup";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import useSignup from "@/hooks/useSignin";
+import { useToast } from "./ui/use-toast";
+import { Links } from "@/config/links";
 
 type FormData = z.infer<typeof userSignupSchema>;
 
 function Signup() {
   const form = useForm<FormData>({
     defaultValues: {
-      email: "",
-      mobile: "",
       name: "",
       password: "",
       passwordRecheck: "",
-      joiningKey: "",
+      joiningId: "",
     },
     resolver: zodResolver(userSignupSchema),
   });
+  const signin = useSignup();
+  const router = useRouter();
+  const { toast } = useToast();
 
   async function onSubmit(data: FormData) {
-    console.log({ data });
+    console.log(data);
+    if (data.password !== data.passwordRecheck) {
+      toast({
+        title: "Passwords don't match",
+        description: "Please check passwords again",
+      });
+      return;
+    }
+    signin.mutate(data, {
+      onError: (error: unknown) => {
+        console.error(error);
+        toast({
+          title: "Error while sign-up",
+          description: "Please check network connect and try again",
+        });
+      },
+      onSuccess: (data) => {
+        console.log({ data });
+        toast({
+          title: data.status ? "Signed-up, redirecting" : "Error while signup",
+          description: data.message,
+        });
+        if (!!data.status) {
+          form.reset();
+          setTimeout(() => {
+            router.push(Links.signin.href);
+          }, 1000);
+        }
+      },
+    });
   }
 
   return (
-    <div className="flex justify-center items-center my-auto">
+    <div className="flex justify-center items-center my-auto sm:pt-16 pt-0">
       <div className="w-full sm:w-[450px] rounded border py-3 px-4">
         <h1 className="text-xl mb-2 mt-3 font-medium text-center">
           Signup Your Account
@@ -46,21 +80,38 @@ function Signup() {
         </p>
         <Form {...form}>
           <form
-            className="flex flex-col gap-6"
             onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-6"
           >
             <FormField
               control={form.control}
-              name="email"
+              name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="example.com"
-                      autoCapitalize="none"
+                      type="text"
                       autoComplete="disable"
-                      autoCorrect="off"
+                      id="name"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="joiningId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Joining Key</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      autoComplete="disable"
+                      id="joining-id"
                       {...field}
                     />
                   </FormControl>
@@ -94,47 +145,11 @@ function Signup() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="mobile"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Modile Number</FormLabel>
-                  <FormControl>
-                    <Input type="tel" autoComplete="disable" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input autoComplete="disable" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="joiningKey"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input autoComplete="disable" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button className="w-full mt-4" type="submit">
+            <Button
+              className="w-full mt-4"
+              type="submit"
+              isLoading={signin.isLoading}
+            >
               Submit
             </Button>
           </form>
