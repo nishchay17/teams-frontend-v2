@@ -14,6 +14,7 @@ import {
   Moon,
   type Icon as LucideIcon,
   ArrowLeft,
+  Github,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
@@ -32,6 +33,7 @@ export const Icons: { [key: string]: Icon } = {
   setting: Settings,
   "add-list": ListPlus,
   reload: RotateCw,
+  github: Github,
   hero: (props: LucideProps) => (
     <svg
       width="30"

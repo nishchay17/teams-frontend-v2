@@ -1,6 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Links } from "@/config/links";
 import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+import { githubLink, Links } from "@/config/links";
+import { Icons } from "../icons";
 
 export default function Hero() {
   return (
@@ -16,7 +18,7 @@ export default function Hero() {
           Teams Collab gets your team in-sync <br />
           with asingle platform for all your tasks.
         </p>
-        <div className="flex justify-center mt-14">
+        <div className="flex justify-center mt-12">
           <Link href={Links.signup.href}>
             <Button size="sm" variant="outline" className="mr-3 shadow">
               Registration
@@ -25,6 +27,14 @@ export default function Hero() {
           <Link href={Links.signin.href}>
             <Button size="sm" variant="ghost">
               Have a joining key?
+            </Button>
+          </Link>
+        </div>
+        <div className="mt-6 text-center">
+          <Link href={githubLink} target="_blank" rel="noopener">
+            <Button size="sm" variant={"ghost"}>
+              <Icons.github size="1.25rem" className="mr-2" /> Visit us at
+              Github
             </Button>
           </Link>
         </div>

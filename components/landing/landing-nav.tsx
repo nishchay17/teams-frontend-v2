@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
-import { Links } from "@/config/links";
+import { githubLink, Links } from "@/config/links";
 import { Button } from "../ui/button";
 import { Icons } from "../icons";
 
@@ -42,15 +43,22 @@ export default function LandingNav() {
           <Icons.hero height={16} width={16} />
           <h2 className="text-sm ml-2">Team Collob</h2>
         </div>
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() =>
-            router.push(isAuth ? Links.task.href : Links.signin.href)
-          }
-        >
-          {isAuth ? "Dashboard" : "Login"}
-        </Button>
+        <div className="flex gap-2">
+          <Link href={githubLink} target="_blank" rel="noopener">
+            <Button size="sm" variant={"ghost"}>
+              <Icons.github size="1.25rem" />
+            </Button>
+          </Link>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() =>
+              router.push(isAuth ? Links.task.href : Links.signin.href)
+            }
+          >
+            {isAuth ? "Dashboard" : "Login"}
+          </Button>
+        </div>
       </div>
     </nav>
   );

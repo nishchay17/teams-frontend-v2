@@ -46,3 +46,6 @@ export const Links = {
     icon: "manage",
   },
 } as const;
+
+export const githubLink =
+  "https://github.com/nishchay17/teams-frontend-v2" as const;
