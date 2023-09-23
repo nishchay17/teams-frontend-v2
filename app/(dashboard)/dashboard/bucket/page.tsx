@@ -77,7 +77,7 @@ export default function BucketPage() {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-7">
+      <div className="flex sm:justify-between sm:items-center flex-col sm:flex-row mb-7 gap-4">
         <h2 className="text-2xl">Bucket</h2>
         <Button
           form="add-bucket-item"
@@ -89,7 +89,7 @@ export default function BucketPage() {
       </div>
       <Form {...form}>
         <form id="add-bucket-item" onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex-1 flex gap-4 flex-col">
               <FormField
                 control={form.control}

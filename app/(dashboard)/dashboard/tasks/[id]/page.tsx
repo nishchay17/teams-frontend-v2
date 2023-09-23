@@ -104,14 +104,14 @@ export default function Task({ params: { id } }: Props) {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-7">
+      <div className="flex justify-between items-start sm:items-center mb-7 gap-3">
         <Link href={!!back ? back : Links.task.href}>
           <Button variant="outline">
             <ArrowLeft size="1rem" className="mr-2" />
             Back
           </Button>
         </Link>
-        <div>
+        <div className="flex flex-col sm:flex-row gap-2">
           <Button
             className="mr-2"
             variant="secondary"

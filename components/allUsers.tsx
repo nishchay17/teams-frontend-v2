@@ -52,7 +52,7 @@ export default function AllUsers() {
 
   if (allUsers.isLoading) {
     return (
-      <div className="grid grid-cols-4 gap-4 mb-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4">
         {Array(6)
           .fill(1)
           .map((_, i) => (
@@ -73,7 +73,7 @@ export default function AllUsers() {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-4 mb-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-4">
         {allUsers.data.users.map((data: UserType) => (
           <UserProfileCard
             key={data._id}
@@ -90,6 +90,7 @@ export default function AllUsers() {
         ))}
       </div>
       <Pagination
+        className="mt-2 mb-4"
         onPageChange={onPageChange}
         perPage={PER_PAGE}
         totalCount={allUsers.data.pagination.count}

@@ -59,7 +59,7 @@ export default function FileDropzone({
       <label htmlFor={`file-${id}`}>
         <div
           ref={drop}
-          className="rounded-md border border-input flex justify-center items-center h-full relative"
+          className="rounded-md border border-input flex justify-center items-center min-h-[5rem] h-full relative"
         >
           {!!error ? (
             <p className="text-red-400">{error}</p>
