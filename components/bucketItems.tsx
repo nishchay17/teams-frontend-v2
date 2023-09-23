@@ -31,7 +31,7 @@ export default function BucketItems({}: Props) {
 
   if (allBucketItems.isLoading) {
     return (
-      <div className="grid grid-cols-4 gap-4 my-7">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 my-7">
         {Array(6)
           .fill(1)
           .map((_, i) => (
@@ -54,7 +54,7 @@ export default function BucketItems({}: Props) {
 
   return (
     <>
-      <div className="grid grid-cols-4 gap-4 my-7">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 my-7">
         {allBucketItems.data.bucketItems.map(
           (
             { description, name, file, uploadedBy, _id }: BucketItem,

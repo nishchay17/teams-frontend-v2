@@ -222,7 +222,7 @@ export default function Tasks() {
         <TaskSkeleton />
       ) : (
         <DragDropContext onDragEnd={onDragEnd}>
-          <div className="grid grid-cols-3 gap-5 mb-5">
+          <div className="grid grid-rows-[auto_auto_auto] sm:grid-rows-1 sm:grid-cols-3 gap-5 mb-5">
             {Object.values(columns).map((col) => (
               <Droppable droppableId={col.id} key={col.id}>
                 {(provided) => (

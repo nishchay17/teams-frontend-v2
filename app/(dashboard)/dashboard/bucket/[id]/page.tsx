@@ -29,7 +29,7 @@ export default function BucketItem({ params: { id } }: Props) {
   const bucketData = bucketItem.data.bucketItem;
   return (
     <>
-      <div className="flex justify-between items-center">
+      <div className="flex sm:justify-between sm:items-center flex-col sm:flex-row gap-4">
         <Link href={Links.bucket.href}>
           <Button variant="outline">
             <ArrowLeft size="1rem" className="mr-2" />
@@ -41,10 +41,11 @@ export default function BucketItem({ params: { id } }: Props) {
           isLoading={bucketItem.isLoading}
         />
       </div>
-      <div className="flex justify-between items-center mt-6">
+      <div className="flex sm:justify-between sm:items-center flex-col sm:flex-row mt-6 gap-2 sm:gap-4">
         <h2 className="text-2xl">{capitalize(bucketData.name)}</h2>
         <p className="text-sm opacity-75">
-          Uploaded by: {bucketData.uploadedBy.name} <br />
+          Uploaded by: {bucketData.uploadedBy.name}{" "}
+          <br className="hidden sm:block" />
           at <i>{new Date(bucketData.createdAt).toLocaleString()}</i>
         </p>
       </div>

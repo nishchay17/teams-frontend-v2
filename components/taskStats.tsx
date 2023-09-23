@@ -13,7 +13,7 @@ function TaskStats() {
         <p className="text-xs mb-1">
           <i>Your Status</i>
         </p>
-        <div className="flex rounded w-[200px] overflow-hidden">
+        <div className="flex rounded w-[125px] sm:w-[200px] overflow-hidden">
           <Skeleton className="h-2 w-full" />
         </div>
       </div>
@@ -24,7 +24,7 @@ function TaskStats() {
       <p className="text-xs mb-1">
         <i>Your Status</i>
       </p>
-      <div className="flex rounded w-[200px] overflow-hidden">
+      <div className="flex rounded w-[125px] sm:w-[200px] overflow-hidden">
         <div
           title={`New: ${assigned}`}
           style={{ width: `${(assigned / total) * 100}%` }}
