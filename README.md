@@ -1,6 +1,6 @@
 # Team Colabs
 
-[![Website](https://img.shields.io/website?label=Website&url=https://teams-frontend.vercel.app/)](https://teams-frontend.vercel.app/) [![GitHub License](https://img.shields.io/github/license/nishchay17/teams-frontend-v2)](https://github.com/yourusername/your-repo/blob/main/LICENSE)
+[![Website](https://img.shields.io/website?label=Website&url=https://teams-frontend.vercel.app/)](https://teams-frontend.vercel.app/) [![GitHub License](https://img.shields.io/github/license/nishchay17/teams-frontend-v2)](https://github.com/nishchay17/teams-frontend-v2/blob/main/LICENSE)
 
 Teams Collab gets your team in-sync  with asingle platform for all your tasks.
 
